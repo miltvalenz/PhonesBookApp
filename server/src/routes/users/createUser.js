@@ -1,34 +1,49 @@
 const express = require('express');
 const router = express.Router();
-const { check } = require('express-validator');
+const { check, body, validationResult } = require('express-validator');
 
-/* GET users listing. */
+/**
+ *
+ */
 module.exports = ({ User }) => {
 	router.post(
 		'/register',
 		[
-			check('name').isLength({ min: 3 }),
-			check(
-				'email',
-				'The password must be 5+ chars long and contain a number'
-			).isEmail(),
-			check('password').isLength({ min: 8 }),
-			check('passwordConfirmation').isLength({ min: 8 }),
-			check('email').custom(value => {
-				return User.findByEmail(value).then(user => {
-					if (user) {
-						return Promise.reject('E-mail already in use');
-					}
-				});
-			}),
-			check('password').custom((value, { req }) => {
-				if (value !== req.body.passwordConfirmation) {
-					throw new Error('Password confirmation is incorrect');
+			check('name')
+				.isLength({ min: 2 })
+				.withMessage('Must be 2 characteres minimun'),
+			check('email')
+				.isEmail()
+				.normalizeEmail()
+				.withMessage('Must be a valid email'),
+			check('email').custom(async value => {
+				const emailSearch = await User.findOne({ email: value });
+				if (emailSearch) {
+					throw new Error(
+						'Email already in use'
+					);
 				}
+			}),
+			check('password')
+				.isLength({ min: 8 })
+				.withMessage('Must be 8 characters minimun'),
+			check('passwordConfirmation').custom((value, { req }) => {
+				if (value !== req.body.password) {
+					throw new Error(
+						'Password confirmation does not match password'
+					);
+				}
+				return true;
 			})
 		],
 		async (req, res, next) => {
 			try {
+				const errors = validationResult(req);
+				console.log(req.body);
+				if (!errors.isEmpty()) {
+					return res.status(422).json({ errors: errors.array() });
+				}
+
 				const {
 					name,
 					email,
@@ -41,7 +56,8 @@ module.exports = ({ User }) => {
 					email,
 					password
 				});
-                console.log(newUser);
+
+				console.log(newUser);
 				await newUser.save();
 
 				res.status(200).json({ User: newUser });
