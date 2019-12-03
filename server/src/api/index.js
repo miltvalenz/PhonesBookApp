@@ -8,12 +8,12 @@ const { errorHandler } = require('../middleware');
 /**
  * Requires all routes here.
  */
-const { getUsers } = require('../../routes/users');
+const { getUsers, createUser} = require('../routes/users');
 
 /**
  * Requires all models here.
  */
-const User = require('../../models/user');
+const User = require('../models/user');
 
 /**
  * Combine all models to one object.
@@ -27,6 +27,7 @@ const routersInit = () => {
 	const router = express.Router();
 
 	router.use('/users', getUsers(models));
+	router.use('/users', createUser(models));
 
 	// Catch endpoints errors.
 	router.use(errorHandler);

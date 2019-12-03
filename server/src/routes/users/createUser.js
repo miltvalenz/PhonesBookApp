@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { check } = require('express-validator/check');
+const { check } = require('express-validator');
 
 /* GET users listing. */
 module.exports = ({ User }) => {
