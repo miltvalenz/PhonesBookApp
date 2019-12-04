@@ -3,12 +3,17 @@ const express = require('express');
 /**
  * Middlewares
  */
-const { errorHandler } = require('../middleware');
+const { errorHandler, passport } = require('../middleware');
 
 /**
  * Requires all routes here.
  */
-const { getUsers, createUser, getUserById, deleteUser } = require('../routes/users');
+const {
+	getUsers,
+	createUser,
+	getUserById,
+	deleteUser
+} = require('../routes/users');
 const { createContact } = require('../routes/contacts');
 
 /**
