@@ -13,6 +13,7 @@ const {
 	createUser,
 	getUserById,
 	deleteUser,
+	updateUser,
 	logIn,
 	logOut
 } = require('../routes/users');
@@ -40,6 +41,7 @@ const routersInit = () => {
 	router.use('/users', createUser(models));
 	router.use('/users', getUserById(models, helpers.isAuthenticated));
 	router.use('/users', deleteUser(models));
+	router.use('/users', updateUser(models));
 	router.use('/users', logIn(passport));
 	router.use('/users', logOut());
 
