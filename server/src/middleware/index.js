@@ -1,4 +1,5 @@
 module.exports = {
-    errorHandler: require('./error-handler'),
-    passport: require('./passport')
+	errorHandler: require('./error-handler'),
+	passport: require('./passport'),
+	helpers: require('./helpers')
 };

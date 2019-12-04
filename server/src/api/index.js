@@ -3,7 +3,7 @@ const express = require('express');
 /**
  * Middlewares
  */
-const { errorHandler, passport } = require('../middleware');
+const { errorHandler, passport, helpers } = require('../middleware');
 
 /**
  * Requires all routes here.
@@ -13,7 +13,8 @@ const {
 	createUser,
 	getUserById,
 	deleteUser,
-	logIn
+	logIn,
+	logOut
 } = require('../routes/users');
 const { createContact } = require('../routes/contacts');
 
@@ -37,9 +38,10 @@ const routersInit = () => {
 	/** Users Routes*/
 	router.use('/users', getUsers(models));
 	router.use('/users', createUser(models));
-	router.use('/users', getUserById(models));
+	router.use('/users', getUserById(models, helpers.isAuthenticated));
 	router.use('/users', deleteUser(models));
 	router.use('/users', logIn(passport));
+	router.use('/users', logOut());
 
 	/** Contacts Routes */
 	router.use('/contacts', createContact(models));

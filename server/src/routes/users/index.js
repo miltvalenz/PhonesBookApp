@@ -3,5 +3,6 @@ module.exports = {
 	getUserById: require('./getUserById'),
 	createUser: require('./createUser'),
 	deleteUser: require('./deleteUser'),
-	logIn: require('./logIn')
+	logIn: require('./logIn'),
+	logOut: require('./logOut')
 };
