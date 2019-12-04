@@ -19,9 +19,7 @@ module.exports = ({ User }) => {
 			check('email').custom(async value => {
 				const emailSearch = await User.findOne({ email: value });
 				if (emailSearch) {
-					throw new Error(
-						'Email already in use'
-					);
+					throw new Error('Email already in use');
 				}
 			}),
 			check('password')
@@ -39,7 +37,7 @@ module.exports = ({ User }) => {
 		async (req, res, next) => {
 			try {
 				const errors = validationResult(req);
-				console.log(req.body);
+				
 				if (!errors.isEmpty()) {
 					return res.status(422).json({ errors: errors.array() });
 				}
@@ -56,6 +54,8 @@ module.exports = ({ User }) => {
 					email,
 					password
 				});
+
+				newUser.password = await newUser.encryptPassword(password);
 
 				console.log(newUser);
 				await newUser.save();
