@@ -8,7 +8,7 @@ const { errorHandler } = require('../middleware');
 /**
  * Requires all routes here.
  */
-const { getUsers, createUser, getUserById } = require('../routes/users');
+const { getUsers, createUser, getUserById, deleteUser } = require('../routes/users');
 const { createContact } = require('../routes/contacts');
 
 /**
@@ -32,6 +32,7 @@ const routersInit = () => {
 	router.use('/users', getUsers(models));
 	router.use('/users', createUser(models));
 	router.use('/users', getUserById(models));
+	router.use('/users', deleteUser(models));
 
 	/** Contacts Routes */
 	router.use('/contacts', createContact(models));
