@@ -12,7 +12,8 @@ const {
 	getUsers,
 	createUser,
 	getUserById,
-	deleteUser
+	deleteUser,
+	logIn
 } = require('../routes/users');
 const { createContact } = require('../routes/contacts');
 
@@ -38,6 +39,7 @@ const routersInit = () => {
 	router.use('/users', createUser(models));
 	router.use('/users', getUserById(models));
 	router.use('/users', deleteUser(models));
+	router.use('/users', logIn(passport));
 
 	/** Contacts Routes */
 	router.use('/contacts', createContact(models));
