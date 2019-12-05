@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-// const ObjectId = Schema.Types.ObjectId;
+const ObjectId = Schema.Types.ObjectId;
 
 const schema = new Schema({
   name: {
@@ -15,7 +15,11 @@ const schema = new Schema({
   },
   number2: {
     type: Number,
-  }
+  },
+	user: {
+		type: ObjectId,
+		required: [true]
+	}
 });
 
 module.exports = schema;
