@@ -5,6 +5,7 @@ const logger = require('morgan');
 const dotenv = require('dotenv');
 const passport = require('passport');
 const session = require('express-session');
+const cors = require('cors');
 
 const api = require('./src/api');
 const app = express();
@@ -14,8 +15,7 @@ const app = express();
  */
 dotenv.config();
 require('./src/db/database');
-require('./src/middleware')
-
+require('./src/middleware');
 
 /**
  * Middlewares
@@ -24,13 +24,16 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({
-    secret: 'mysecretapp',
-    resave: true,
-    saveUninitialized: true
-}));
+app.use(
+	session({
+		secret: 'mysecretapp',
+		resave: true,
+		saveUninitialized: true
+	})
+);
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
