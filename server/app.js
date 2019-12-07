@@ -31,8 +31,8 @@ app.use(
 		saveUninitialized: true
 	})
 );
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'public')));

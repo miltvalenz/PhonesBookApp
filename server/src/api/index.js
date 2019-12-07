@@ -37,9 +37,9 @@ const routersInit = () => {
 	const router = express.Router();
 
 	/** Users Routes*/
-	router.use('/users', getUsers(models));
+	router.use('/users', getUsers(models, passport));
 	router.use('/users', createUser(models));
-	router.use('/users', getUserById(models, helpers.isAuthenticated));
+	router.use('/users', getUserById(models, passport));
 	router.use('/users', deleteUser(models));
 	router.use('/users', updateUser(models));
 	router.use('/users', logIn(passport));

@@ -8,6 +8,12 @@ module.exports = ({ User }) => {
 	router.put('/edit/:id', async (req, res, next) => {
 		try {
 			const { name, email, password } = req.body;
+			const userFind = await User.findById(req.params.id);
+
+			if(!userFind){
+				res.status(400).json({ message: 'User not found' });
+				return;
+			}
 
 			const user = {
 				name,

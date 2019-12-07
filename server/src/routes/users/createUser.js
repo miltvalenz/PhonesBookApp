@@ -37,7 +37,7 @@ module.exports = ({ User }) => {
 		async (req, res, next) => {
 			try {
 				const errors = validationResult(req);
-				
+
 				if (!errors.isEmpty()) {
 					return res.status(422).json({ errors: errors.array() });
 				}
@@ -62,7 +62,10 @@ module.exports = ({ User }) => {
 
 				res.status(200).json({ User: newUser });
 			} catch {
-				next(error);
+				res.status(400).send({
+					error:
+						'req body should take the form { username, password }'
+				});
 			}
 		}
 	);
