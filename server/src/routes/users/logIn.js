@@ -15,6 +15,7 @@ module.exports = passport => {
 
 			/** This is what ends up in our JWT */
 			const payload = {
+				id: user.id,
 				email: user.email,
 				expires: Date.now() + parseInt(process.env.JWT_EXPIRATION_MS)
 			};

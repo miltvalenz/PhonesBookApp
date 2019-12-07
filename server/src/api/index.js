@@ -11,7 +11,7 @@ const { errorHandler, passport, helpers } = require('../middleware');
 const {
 	getUsers,
 	createUser,
-	getUserById,
+	getUserDetails,
 	deleteUser,
 	updateUser,
 	logIn,
@@ -39,7 +39,7 @@ const routersInit = () => {
 	/** Users Routes*/
 	router.use('/users', getUsers(models, passport));
 	router.use('/users', createUser(models));
-	router.use('/users', getUserById(models, passport));
+	router.use('/users', getUserDetails(models, passport));
 	router.use('/users', deleteUser(models));
 	router.use('/users', updateUser(models));
 	router.use('/users', logIn(passport));

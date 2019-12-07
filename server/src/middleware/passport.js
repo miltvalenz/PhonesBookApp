@@ -30,18 +30,6 @@ passport.use(
 				done(error);
 			}
 
-			/**
-         * if(!user){
-            return done(null, false, {message: 'Not User Found'});
-        } else {
-            
-            if (match){
-                return done(null, user);
-            } else {
-                return done(null, false, {message: 'Incorrect Password'});
-            }
-        }
-         */
 		}
 	)
 );
@@ -55,7 +43,6 @@ passport.use(
 		(jwtPayload, done) => {
 			console.log(jwtPayload);
 			if (Date.now() > jwtPayload.expires) {
-				console.log("epa")
 				return done('jwt expired');
 			}
 
@@ -64,16 +51,5 @@ passport.use(
 	)
 );
 
-/** 
-passport.serializeUser((user, done) => {
-    done(null, user.id);
-});
-
-passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => {
-        done(err, user);
-    });
-});
-*/
 
 module.exports = passport;

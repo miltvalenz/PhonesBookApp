@@ -5,15 +5,14 @@ const jwt = require('jsonwebtoken');
 /* GET user. */
 module.exports = ({ User }, passport) => {
 	router.get(
-		'/details/:id',
+		'/details',
 		passport.authenticate('jwt', { session: false }),
 		async (req, res, next) => {
-			
 			try {
-				//const user = await User.findById(req.params.id);
-				const { user } = req;
+				const id = req.user.id;
+				const user = await User.findById(id);
 				res.status(200).json({ User: user });
-			} catch{
+			} catch {
 				next(error);
 			}
 		}
