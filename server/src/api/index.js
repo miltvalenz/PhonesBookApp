@@ -46,7 +46,7 @@ const routersInit = () => {
 	router.use('/users', logOut());
 
 	/** Contacts Routes */
-	router.use('/contacts', createContact(models));
+	router.use('/contacts', createContact(models, passport));
 
 	/** Catch endpoints errors */
 	router.use(errorHandler);

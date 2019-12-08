@@ -34,9 +34,14 @@ module.exports = passport => {
 					'marico el que lo lea'
 				);
 
+				const response = {
+					User: user, 
+					Token: token
+				}
+
 				/** assign our jwt to the cookie */
 				// res.cookie('jwt', jwt, { httpOnly: true, secure: true });
-				res.status(200).json({ User: user, Token: token });
+				res.status(200).json(response);
 			});
 		})(req, res);
 	});
