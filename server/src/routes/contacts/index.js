@@ -2,5 +2,6 @@ module.exports = {
 	createContact: require('./createContact'),
 	updateContact: require('./updateContact'),
 	deleteContact: require('./deleteContact'),
-	getContactDetails: require('./getContactDetails')
+	getContactDetails: require('./getContactDetails'),
+	getContacts: require('./getContacts')
 };

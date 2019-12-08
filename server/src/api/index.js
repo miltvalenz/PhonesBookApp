@@ -22,7 +22,8 @@ const {
 	createContact,
 	updateContact,
 	deleteContact,
-	getContactDetails
+	getContactDetails,
+	getContacts
 } = require('../routes/contacts');
 
 /**
@@ -56,6 +57,7 @@ const routersInit = () => {
 	router.use('/contacts', updateContact(models, passport));
 	router.use('/contacts', deleteContact(models, passport));
 	router.use('/contacts', getContactDetails(models, passport));
+	router.use('/contacts', getContacts(models, passport));
 
 	/** Catch endpoints errors */
 	router.use(errorHandler);
