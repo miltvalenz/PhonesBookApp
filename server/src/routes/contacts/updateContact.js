@@ -11,7 +11,7 @@ module.exports = ({ Contact }, passport) => {
 		passport.authenticate('jwt', { session: false }),
 		async (req, res, next) => {
 			try {
-				const { name, email, phone1, phone2 } = req.body;
+				const { name, email, number1, number2 } = req.body;
 				const contactFind = await Contact.findById(req.params.id);
 
 				if (!contactFind) {
@@ -22,9 +22,9 @@ module.exports = ({ Contact }, passport) => {
 				const contact = {
 					name,
 					email,
-                    phone1,
-                    phone2,
-                    user: contactFind.user
+					number1,
+					number2,
+					user: contactFind.user
 				};
 
 				await Contact.findByIdAndUpdate(req.params.id, contact);

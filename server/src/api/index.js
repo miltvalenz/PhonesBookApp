@@ -18,7 +18,11 @@ const {
 	logOut
 } = require('../routes/users');
 
-const { createContact, updateContact } = require('../routes/contacts');
+const {
+	createContact,
+	updateContact,
+	deleteContact
+} = require('../routes/contacts');
 
 /**
  * Requires all models here.
@@ -49,6 +53,7 @@ const routersInit = () => {
 	/** Contacts Routes */
 	router.use('/contacts', createContact(models, passport));
 	router.use('/contacts', updateContact(models, passport));
+	router.use('/contacts', deleteContact(models, passport));
 
 	/** Catch endpoints errors */
 	router.use(errorHandler);
