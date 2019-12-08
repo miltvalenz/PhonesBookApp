@@ -1,39 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { check, body, validationResult } = require('express-validator');
 
 /**
- *
+ * POST
+ * New User register.
  */
-module.exports = ({ User }) => {
+module.exports = ({ User }, validation, schemas) => {
 	router.post(
 		'/register',
-		[
-			check('name')
-				.isLength({ min: 2 })
-				.withMessage('Must be 2 characteres minimun'),
-			check('email')
-				.isEmail()
-				.normalizeEmail()
-				.withMessage('Must be a valid email'),
-			check('email').custom(async value => {
-				const emailSearch = await User.findOne({ email: value });
-				if (emailSearch) {
-					throw new Error('Email already in use');
-				}
-			}),
-			check('password')
-				.isLength({ min: 8 })
-				.withMessage('Must be 8 characters minimun'),
-			check('passwordConfirmation').custom((value, { req }) => {
-				if (value !== req.body.password) {
-					throw new Error(
-						'Password confirmation does not match password'
-					);
-				}
-				return true;
-			})
-		],
+		validation(schemas.user, 'body'),
 		async (req, res, next) => {
 			try {
 				const errors = validationResult(req);

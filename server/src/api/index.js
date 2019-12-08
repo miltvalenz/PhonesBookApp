@@ -3,8 +3,9 @@ const express = require('express');
 /**
  * Middlewares
  */
-const { errorHandler, passport, helpers, validation } = require('../middleware');
+const { errorHandler, passport, validation } = require('../middleware');
 const { schemas } = require('../middleware/schemas');
+
 /**
  * Requires all routes here.
  */
@@ -45,16 +46,22 @@ const routersInit = () => {
 
 	/** Users Routes*/
 	router.use('/users', getUsers(models, passport));
-	router.use('/users', createUser(models));
+	router.use('/users', createUser(models, validation, schemas));
 	router.use('/users', getUserDetails(models, passport));
 	router.use('/users', deleteUser(models));
-	router.use('/users', updateUser(models, passport));
+	router.use('/users', updateUser(models, passport, validation, schemas));
 	router.use('/users', logIn(passport));
 	router.use('/users', logOut());
 
 	/** Contacts Routes */
-	router.use('/contacts', createContact(models, passport, validation, schemas));
-	router.use('/contacts', updateContact(models, passport));
+	router.use(
+		'/contacts',
+		createContact(models, passport, validation, schemas)
+	);
+	router.use(
+		'/contacts',
+		updateContact(models, passport, validation, schemas)
+	);
 	router.use('/contacts', deleteContact(models, passport));
 	router.use('/contacts', getContactDetails(models, passport));
 	router.use('/contacts', getContacts(models, passport));

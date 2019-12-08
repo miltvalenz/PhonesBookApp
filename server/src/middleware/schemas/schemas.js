@@ -21,7 +21,8 @@ const schemas = {
 			.min(3)
 			.max(30)
 			.required(),
-		email: Joi.string().email(),
+		email: Joi.string()
+			.email(),
 		number1: Joi.number()
 			.min(3)
 			.positive()

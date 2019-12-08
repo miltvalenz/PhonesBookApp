@@ -5,10 +5,11 @@ const router = express.Router();
  * PUT
  * Edit details of User Contact.
  */
-module.exports = ({ Contact }, passport) => {
+module.exports = ({ Contact }, passport, validation, schemas) => {
 	router.put(
 		'/edit/:id',
 		passport.authenticate('jwt', { session: false }),
+		validation(schemas.contact, 'body'),
 		async (req, res, next) => {
 			try {
 				const { name, email, number1, number2 } = req.body;
