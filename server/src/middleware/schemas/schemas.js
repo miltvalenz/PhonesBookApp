@@ -2,8 +2,8 @@ const Joi = require('joi');
 
 /**
  * Schemas for validate data.
- * User model.
- * Contact model.
+ * User schema.
+ * Contact schema.
  */
 const schemas = {
 	user: Joi.object().keys({
@@ -14,6 +14,9 @@ const schemas = {
 		email: Joi.string().required(),
 		password: Joi.string()
 			.min(8)
+			.required(),
+		passwordConfirmation: Joi.string()
+			.min(8)
 			.required()
 	}),
 	contact: Joi.object().keys({
@@ -21,8 +24,7 @@ const schemas = {
 			.min(3)
 			.max(30)
 			.required(),
-		email: Joi.string()
-			.email(),
+		email: Joi.string().email(),
 		number1: Joi.number()
 			.min(3)
 			.positive()
