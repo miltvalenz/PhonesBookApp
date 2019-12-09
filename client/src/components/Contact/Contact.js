@@ -52,7 +52,7 @@ class Contact extends Component {
 				<div>
 					<p>{this.state.Name}</p>
 					<p>{this.state.Email}</p>
-					<h1>{this.state.Number1}</h1>
+					<p>{this.state.Number1}</p>
 					<p>{this.state.Number2}</p>
 				</div>
 			</div>

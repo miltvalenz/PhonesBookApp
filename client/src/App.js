@@ -7,6 +7,7 @@ import LogIn from './components/LogIn/LogIn';
 import Dashboard from './components/Dashboard/Dashboard';
 import Contact from './components/Contact/Contact';
 import ContactRegister from './components/ContactRegister/ContactRegister';
+import ContactList from './components/ContactList/ContactList';
 
 function App() {
 	return (
@@ -14,7 +15,8 @@ function App() {
 			<Switch>
 				<Route exact path="/Login" component={LogIn} />
 				<Route exact path="/Register" component={Register} />
-				<Route exact path="/Contacts" component={Contact} />
+				<Route exact path="/Contacts/details" component={Contact} />
+				<Route exact path="/Contacts" component={ContactList} />
 				<Route exact path="/Contacts/Create" component={ContactRegister} />
 			</Switch>
 			<Switch>
